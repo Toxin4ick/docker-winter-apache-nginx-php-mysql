@@ -6,7 +6,6 @@ RUN apt-get update && apt-get install -y \
       libpng-dev \
       libzip-dev \
       libgd-dev \
-      libgd2 \
       zip unzip \
       git && \
       docker-php-ext-install pdo_mysql && \
@@ -24,3 +23,7 @@ RUN curl -sS https://getcomposer.org/installer | php -- \
     --install-dir=/usr/local/bin
 
 WORKDIR /var/www
+RUN chmod -R 775 /var/www/
+RUN chown -R www-data:www-data /var/www/
+RUN a2enmod rewrite
+RUN service apache2 restart
