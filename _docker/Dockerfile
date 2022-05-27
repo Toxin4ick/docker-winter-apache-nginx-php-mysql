@@ -23,8 +23,8 @@ RUN curl -sS https://getcomposer.org/installer | php -- \
     --install-dir=/usr/local/bin
 
 WORKDIR /var/www
-RUN composer install
 RUN chmod -R 775 /var/www
 RUN chown -R www-data:www-data /var/www
+RUN adduser root www-data
 RUN a2enmod rewrite
 RUN service apache2 restart
