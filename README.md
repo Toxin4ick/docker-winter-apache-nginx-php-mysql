@@ -1,1 +1,1 @@
-Первая попытка собрать контейнер из образов php, apache, mysql, phpmyadmin с установленной Winter CMS
+Первая попытка собрать контейнер из образов php, apache, nginx, mysql, phpmyadmin с установленной Winter CMS
