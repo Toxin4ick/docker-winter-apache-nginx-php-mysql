@@ -1,18 +1,31 @@
 version: '3'
 
 services:
-  app:
+  apache:
+      image: httpd:2.4
+      volumes:
+        - ./:/var/www
+        - ./_docker/httpd/httpd.conf:/usr/local/apache2/conf/httpd.conf
+      depends_on:
+        - php
+  nginx:
+      image: nginx:1.13
+      ports:
+        - 80:80
+      volumes:
+        - ./:/var/www
+        - ./_docker/nginx/nginx.conf:/etc/nginx/nginx.conf
+      depends_on:
+        - apache
+  php:
     build:
       context: .
       dockerfile: _docker/Dockerfile
-    ports:
-    - 8080:80
     volumes:
       - ./:/var/www
-      - ./_docker/default.conf:/etc/apache2/sites-enabled/000-default.conf
+      # - ./_docker/default.conf:/etc/apache2/sites-enabled/000-default.conf
     depends_on:
       - mysql
-    container_name: project_app
 
   mysql:
     image: mysql:5.7
